@@ -71,7 +71,7 @@ ZSH_THEME="{{ zsh_theme }}"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-{% if plugins_ohmyzsh_bundles_names | length > 0 %}
+{% if ohmyzsh_plugins | length > 0 %}
 plugins=({{ ohmyzsh_plugins | join(' ') }})
 {% endif %}
 

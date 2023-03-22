@@ -1,6 +1,8 @@
 ---
 ohmyzsh_update_zshrc: true
+
 zsh_theme: powerlevel10k/powerlevel10k
+
 zsh_custom_shell_command: "false"
 # useful when users are bound to external systems (i.e. active directory)
 # zsh_custom_shell_command: "true"
@@ -22,14 +24,15 @@ ohmyzsh_plugins: []
   # Bundles from the default repo (robbyrussell's oh-my-zsh) only need a name
   # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
   #
-  # `name` is required (any valid file name will do so long as it's unique for the bundles)
-  # `url` is git username/repo
-  # `version` is git release and is required if `url` is define
-  # - name: ansible
-  # - name: aws
-  # - name: docker
-  # - name: docker-compose
-  # - name: pipenv
+  # These are default plugins, so the list is simple
+  # it is required to just use the name, with hashes/dictionary-keys
+  # - ansible
+  # - aws
+  # - docker
+  # - docker-compose
+  # - pipenv
+  # etc.
+
 ohmyzsh_custom_plugins:
   # Syntax highlighting bundle.
   - user: zdharma-continuum
