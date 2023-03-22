@@ -32,19 +32,13 @@ ohmyzsh_plugins: []
   # - name: pipenv
 ohmyzsh_custom_plugins:
   # Syntax highlighting bundle.
-  - name: fast-syntax-highlighting
-    git:
-      user: zdharma-continuum
-      repo: fast-syntax-highlighting
+  - user: zdharma-continuum
+    repo: fast-syntax-highlighting
   # Autosuggestions
-  - name: zsh-autosuggestions
-    repo:
-      user: zsh-users
-      repo: zsh-autosuggestions
+  - user: zsh-users
+    repo: zsh-autosuggestions
 
 ohmyzsh_custom_themes:
-  - name: powerlevel10k
-    git:
-      user: romkatv
-      repo: powerlevel10k
-      version: 'v1.17.0'
+  - user: romkatv
+    repo: powerlevel10k
+    version: 'v1.17.0'
