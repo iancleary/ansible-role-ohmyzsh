@@ -78,7 +78,7 @@ plugins=({{ ohmyzsh_plugins | join(' ') }})
 source $ZSH/oh-my-zsh.sh
 
 {% for custom_plugin in ohmyzsh_custom_plugins -%}
-source {{ ohmyzsh_custom_plugins_folder }}/{{ custom_plugin.git.repo }}.plugin.zsh
+source {{ ohmyzsh_custom_plugins_folder }}/{{ custom_plugin.repo }}.plugin.zsh
 {% endfor %}
 
 # Example aliases
