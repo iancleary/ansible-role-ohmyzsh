@@ -3,11 +3,4 @@
   hosts: all
 
   roles:
-    - role: iancleary.git-repos
-      variable:
-        git_clone_repos:
-          - dest: "~/Automation/Ansible"
-            server: "git@github.com"
-            user: "iancleary"
-            update: "yes"
-            repos: []
+    - role: iancleary.ohmyzsh
