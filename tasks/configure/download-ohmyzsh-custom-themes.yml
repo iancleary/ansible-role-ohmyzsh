@@ -2,7 +2,7 @@
 - name: download ohmyzsh-plugins
   ansible.builtin.git:
       repo: "https://github.com/{{ item[0].user }}/{{ item[0].repo }}"
-      dest: "~{{ item[1] }}/{{ ohmyzsh_themes_folder }}/{{ item[0].repo }}"
+      dest: "~{{ item[1] }}/{{ ohmyzsh_custom_themes_folder }}/{{ item[0].repo }}"
       version: "{{ item[0].version | default('HEAD') }}"
       depth: 1
   with_nested:
