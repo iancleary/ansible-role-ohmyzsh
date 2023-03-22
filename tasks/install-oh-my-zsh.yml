@@ -17,16 +17,26 @@
     state: present
   when: ansible_os_family == 'RedHat'
 
+# - name: clone oh-my-zsh
+#   tags:
+#     # Suppress warning: [ANSIBLE0006] git used in place of git module
+#     # Git module doesn't allow us to set `core.autocrlf=input`.
+#     - skip_ansible_lint
+#   ansible.builtin.command: >-
+#     git clone -c core.autocrlf=input --depth=1
+#      https://github.com/ohmyzsh/ohmyzsh ~/.oh-my-zsh
+#   # core.autocrlf=input prevents
+#   # https://github.com/robbyrussell/oh-my-zsh/issues/4402
+
 - name: clone oh-my-zsh
   tags:
     # Suppress warning: [ANSIBLE0006] git used in place of git module
     # Git module doesn't allow us to set `core.autocrlf=input`.
     - skip_ansible_lint
-  ansible.builtin.command: >-
-    git clone -c core.autocrlf=input --depth=1
-     https://github.com/ohmyzsh/ohmyzsh ~/.oh-my-zsh
-  # core.autocrlf=input prevents
-  # https://github.com/robbyrussell/oh-my-zsh/issues/4402
+  ansible.builtin.git:
+    repo: 'https://github.com/ohmyzsh/ohmyzsh'
+    dest: '~/.oh-my-zsh'
+    depth: 1
 
 - name: set permissions of oh-my-zsh
   become: true
