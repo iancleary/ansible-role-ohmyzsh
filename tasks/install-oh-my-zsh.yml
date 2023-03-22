@@ -1,0 +1,42 @@
+---
+- name: install apt dependencies
+  become: true
+  ansible.builtin.apt:
+    name: 
+      - git
+      - zsh
+    state: present
+  when: ansible_os_family == 'Debian' or ansible_os_family == "elementary OS"
+
+- name: install dnf dependencies
+  become: true
+  ansible.builtin.dnf:
+    name:
+      - git
+      - zsh
+    state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: clone oh-my-zsh
+  tags:
+    # Suppress warning: [ANSIBLE0006] git used in place of git module
+    # Git module doesn't allow us to set `core.autocrlf=input`.
+    - skip_ansible_lint
+  become: true
+  become_user: '{{ remote_user }}'
+  ansible.builtin.command: >-
+    git clone -c core.autocrlf=input --depth=1
+     https://github.com/ohmyzsh/ohmyzsh ~/.oh-my-zsh
+  # core.autocrlf=input prevents
+  # https://github.com/robbyrussell/oh-my-zsh/issues/4402
+
+- name: set permissions of oh-my-zsh
+  become: true
+  file:
+    path: '~/.oh-my-zsh'
+    # Prevent the cloned repository from having insecure permissions.
+    # Failing to do so causes compinit() calls to fail with
+    # "command not found: compdef" errors
+    # for users with insecure umasks (e.g., "002", allowing group writability).
+    mode: 'go-w'
+    recurse: "yes"

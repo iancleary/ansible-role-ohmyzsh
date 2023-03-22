@@ -1,0 +1,56 @@
+---
+- name: Debug - collect zsh path location
+  ansible.builtin.command:
+    cmd: "which zsh"
+  changed_when: "false"
+  register: zsh_installation_path
+
+- name: Debug - display zsh path location
+  debug:
+    msg: "{{ zsh_installation_path.stdout }}"
+
+- name: set default shell (Default Method)
+  become: true
+  ansible.builtin.user:
+    name: '{{ remote_user }}'
+    shell: "{{ zsh_installation_path.stdout }}"
+  when: "not zsh_custom_shell_command|bool"
+
+- name: set default shell (Non-Default Method)
+  become: true
+  ansible.builtin.command:
+    cmd: "{{ zsh_default_shell_command }}"
+  when: "zsh_custom_shell_command|bool"
+
+- name: download custom ohmyzsh plugins
+  include_tasks: configure/download-ohmyzsh-custom-plugins.yml
+
+- name: download custom ohmyzsh themes
+  include_tasks: configure/download-ohmyzsh-custom-themes.yml
+
+- name: write .zshrc
+  become: true
+  become_user: '{{ remote_user }}'
+  ansible.builtin.template:
+    src: zshrc.j2
+    dest: '~/.zshrc'
+    backup: "yes"
+    mode: 'u=rw,go=r'
+  when: ohmyzsh_update_zshrc == true
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=92132
+- name: Ensure /etc/profile.d/* files source correctly
+  become: true
+  ansible.builtin.lineinfile:
+    path: /etc/zsh/zshrc
+    state: present
+    insertafter: 'EOF'
+    regexp: '^. /etc/profile'
+    line: . /etc/profile
+  ignore_errors: true
+  # errors when user is not in /etc/passwd/
+  # privilege escalation related?
+
+- name: console setup for Debian family distributions
+  include_tasks: configure/debian-console-setup.yml
+  when: ansible_os_family == 'Debian'

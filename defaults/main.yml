@@ -1,0 +1,50 @@
+---
+ohmyzsh_update_zshrc: true
+zsh_theme: powerlevel10k/powerlevel10k
+zsh_custom_shell_command: "false"
+# useful when users are bound to external systems (i.e. active directory)
+# zsh_custom_shell_command: "true"
+# zsh_default_shell_command: "/opt/pbis/bin/config LoginShellTemplate /usr/bin/zsh"
+
+zsh_aliases:
+  # https://opensource.com/article/19/7/bash-aliases
+  - ls='ls -F'
+  - ll='ls -lh'
+  - mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
+  - hg='history|grep'  # search bash history, I swapped the letters for github-cli compatibility
+  - left='ls -t -1'  # most recently edited files
+  - cg='cd `git rev-parse --show-toplevel`'  # go to git main level
+
+ohmyzsh_custom_plugins_folder: "~/.oh-my-zsh/custom/plugins"
+ohmyzsh_custom_themes_folder: "~/.oh-my-zsh/custom/themes"
+
+ohmyzsh_plugins: []
+  # Bundles from the default repo (robbyrussell's oh-my-zsh) only need a name
+  # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
+  #
+  # `name` is required (any valid file name will do so long as it's unique for the bundles)
+  # `url` is git username/repo
+  # `version` is git release and is required if `url` is define
+  # - name: ansible
+  # - name: aws
+  # - name: docker
+  # - name: docker-compose
+  # - name: pipenv
+ohmyzsh_custom_plugins:
+  # Syntax highlighting bundle.
+  - name: fast-syntax-highlighting
+    git:
+      user: zdharma-continuum
+      repo: fast-syntax-highlighting
+  # Autosuggestions
+  - name: zsh-autosuggestions
+    repo:
+      user: zsh-users
+      repo: zsh-autosuggestions
+
+ohmyzsh_custom_themes:
+  - name: powerlevel10k
+    git:
+      user: romkatv
+      repo: powerlevel10k
+      version: 'v1.17.0'

@@ -1,0 +1,9 @@
+---
+- name: download ohmyzsh custom plugins
+  ansible.builtin.git:
+      repo: "https://github.com/{{ item[0].user }}/{{ item[0].repo }}"
+      dest: "~{{ item[1] }}/{{ ohmyzsh_plugins_folder }}/{{ item[0].repo }}"
+      version: "{{ item[0].version | default('HEAD') }}"
+  with_nested:
+      # yamllint disable-line rule:line-length
+      - "{{ ohmyzsh_bundles | map(attribute='git') | select('defined') | list }}"
