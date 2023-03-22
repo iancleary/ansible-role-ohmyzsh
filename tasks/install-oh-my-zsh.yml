@@ -22,8 +22,6 @@
     # Suppress warning: [ANSIBLE0006] git used in place of git module
     # Git module doesn't allow us to set `core.autocrlf=input`.
     - skip_ansible_lint
-  become: true
-  become_user: '{{ remote_user }}'
   ansible.builtin.command: >-
     git clone -c core.autocrlf=input --depth=1
      https://github.com/ohmyzsh/ohmyzsh ~/.oh-my-zsh

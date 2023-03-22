@@ -12,7 +12,7 @@
 - name: set default shell (Default Method)
   become: true
   ansible.builtin.user:
-    name: '{{ remote_user }}'
+    name: '{{ ansible_user_id }}'
     shell: "{{ zsh_installation_path.stdout }}"
   when: "not zsh_custom_shell_command|bool"
 
@@ -30,7 +30,7 @@
 
 - name: write .zshrc
   become: true
-  become_user: '{{ remote_user }}'
+  become_user: '{{ ansible_user_id }}'
   ansible.builtin.template:
     src: zshrc.j2
     dest: '~/.zshrc'
