@@ -6,4 +6,4 @@
       version: "{{ item[0].version | default('HEAD') }}"
   with_nested:
       # yamllint disable-line rule:line-length
-      - "{{ ohmyzsh_bundles | map(attribute='git') | select('defined') | list }}"
+      - "{{ ohmyzsh_custom_plugins | map(attribute='git') | select('defined') | list }}"

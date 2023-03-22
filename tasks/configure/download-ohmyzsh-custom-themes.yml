@@ -7,4 +7,4 @@
       depth: 1
   with_nested:
       # yamllint disable-line rule:line-length
-      - "{{ ohmyzsh_themes | map(attribute='git') | select('defined') | list }}"
+      - "{{ ohmyzsh_custom_themes | map(attribute='git') | select('defined') | list }}"
