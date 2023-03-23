@@ -16,6 +16,9 @@ zsh_aliases:
   - hg='history|grep'  # search bash history, I swapped the letters for github-cli compatibility
   - left='ls -t -1'  # most recently edited files
   - cg='cd `git rev-parse --show-toplevel`'  # go to git main level
+  - ga='git add -A'
+  - gc='git commit -m '
+  - gp='git push origin'
 
 ohmyzsh_custom_plugins_folder: "~/.oh-my-zsh/custom/plugins"
 ohmyzsh_custom_themes_folder: "~/.oh-my-zsh/custom/themes"
