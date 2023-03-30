@@ -2,7 +2,7 @@
 - name: download ohmyzsh custom plugins
   ansible.builtin.git:
       repo: "https://github.com/{{ item.user }}/{{ item.repo }}"
-      dest: "~{{ ohmyzsh_custom_plugins_folder }}/{{ item.repo }}"
+      dest: "{{ ohmyzsh_custom_plugins_folder }}/{{ item.repo }}"
       version: "{{ item.version | default('HEAD') }}"
       depth: 1
   loop: "{{ ohmyzsh_custom_plugins }}"
