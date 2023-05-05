@@ -29,7 +29,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install ansible-lint
+        run: pip3 install -r requirements-lint-frozen.txt
 
       - name: Lint code.
         run: |
@@ -59,7 +59,8 @@ jobs:
         run: pip3 install --upgrade pip
 
       - name: Install test dependencies.
-        run: pip3 install -r requirements-test.txt
+        #run: pip3 install ansible molecule molecule-plugins[docker] docker
+        run: pip3 install -r requirements-test-frozen.txt
 
       - name: Run Molecule tests.
         run: molecule test
