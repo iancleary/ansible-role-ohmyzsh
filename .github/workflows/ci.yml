@@ -61,6 +61,7 @@ jobs:
       - name: Ensure Docker service is started
         run: |
           sudo systemctl start docker
+          sudo chmod 666 /var/run/docker.sock
 
       - name: Run Molecule tests.
         run: molecule test
