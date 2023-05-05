@@ -58,6 +58,10 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install ansible molecule molecule-plugins[docker] docker
 
+      - name: Ensure Docker service is started
+        run: |
+          sudo systemctl start docker
+
       - name: Run Molecule tests.
         run: molecule test
         env:
