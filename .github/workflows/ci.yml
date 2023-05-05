@@ -59,7 +59,7 @@ jobs:
         run: pip3 install --upgrade pip
 
       - name: Install test dependencies.
-        run: pip3 install ansible molecule molecule-plugins[docker] docker
+        run: pip3 install ansible molecule molecule-plugins[docker] docker urllib3<2.0
 
       - name: Run Molecule tests.
         run: molecule test
